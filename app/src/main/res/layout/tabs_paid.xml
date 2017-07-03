@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:tag="0"
+        android:id="@+id/td_btn_menu"
+        android:text="Menu"
+        android:background="@drawable/topbar_button_left"
+        style="@style/td_navBar"/>
+    <Button
+        android:tag="1"
+        android:id="@+id/td_btn_pictures"
+        android:text="Pictures"
+        android:background="@drawable/topbar_button_center"
+        style="@style/td_navBar" />
+    <Button
+        android:tag="2"
+        android:id="@+id/td_btn_review"
+        android:text="Reviews"
+        android:background="@drawable/topbar_button_center"
+        style="@style/td_navBar" />
+    <Button
+        android:tag="3"
+        android:id="@+id/td_btn_info"
+        android:text="Info"
+        style="@style/td_navBar"
+        android:background="@drawable/topbar_button_right"/>
+</LinearLayout>

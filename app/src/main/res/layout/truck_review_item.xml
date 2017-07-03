@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="80dp" android:background="#FFF">
+
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:id="@+id/ri_image"
+        android:scaleType="fitCenter"
+        android:src="@drawable/profile"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_weight="6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_margin="1dp"
+            android:id="@+id/ri_name"
+            android:text="James Smith"
+            android:textStyle="bold"
+            android:textSize="12sp"
+            android:textColor="#555"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/star1"
+                style="@style/starsRating"
+                android:button="@drawable/checkbox_rating" />
+            <CheckBox
+                android:id="@+id/star2"
+                style="@style/starsRating"
+                android:button="@drawable/checkbox_rating" />
+            <CheckBox
+                android:id="@+id/star3"
+                style="@style/starsRating"
+                android:button="@drawable/checkbox_rating" />
+            <CheckBox
+                android:id="@+id/star4"
+                style="@style/starsRating"
+                android:button="@drawable/checkbox_rating" />
+            <CheckBox
+                android:id="@+id/star5"
+                style="@style/starsRating"
+                android:button="@drawable/checkbox_rating"/>
+            <TextView
+                android:layout_marginLeft="10dp"
+                android:id="@+id/ri_time"
+                android:text="2h ago"
+                style="@style/lighterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_margin="1dp"
+            android:id="@+id/ri_description"
+            android:textSize="10sp"
+            android:text="@string/dummyReview"
+            android:textColor="#888"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="80dp" android:background="#f7f7f7">
+
+
+    <ImageView
+        android:id="@+id/mi_image"
+        android:scaleType="centerCrop"
+        android:src="@drawable/foodtruck"
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_weight="6"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_margin="1dp"
+            android:id="@+id/mi_name"
+            android:text="Beef Burger"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textColor="#222"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_margin="1dp"
+            android:id="@+id/mi_description"
+            android:textSize="10sp"
+            android:text="This is the description of the beef burger"
+            android:textColor="#888"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp">
+        <TextView
+            android:id="@+id/mi_price"
+            android:text="19 SR"
+            android:textSize="14sp"
+            android:textColor="#222"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/mi_share"
+            android:adjustViewBounds="true"
+            android:padding="4dp"
+            android:src="@drawable/share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

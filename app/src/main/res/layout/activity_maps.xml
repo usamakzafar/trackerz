@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:translationZ="1dp"
+        android:background="#71ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="75dp">
+
+            <ImageView
+                android:layout_weight="1"
+                android:padding="9dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/profile" />
+
+            <Button
+                android:tag="0"
+                android:text="All"
+                android:background="@drawable/topbar_button_left"
+                style="@style/topBar"/>
+            <Button
+                android:tag="1"
+                android:text="Trucks"
+                android:background="@drawable/topbar_button_center"
+                style="@style/topBar" />
+            <Button
+                android:tag="2"
+                android:text="Events"
+                android:background="@drawable/topbar_button_right"
+                style="@style/topBar" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:padding="15dp"
+                android:tint="#767676"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:src="@android:drawable/ic_dialog_info" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:src="@drawable/list2x"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="20dp" />
+
+            <SearchView
+                android:iconifiedByDefault="false"
+                style="@style/Widget.AppCompat.Light.SearchView"
+                android:background="@drawable/searchbar"
+                android:layout_width="0dp"
+                android:layout_weight="6"
+                android:layout_height="35dp"
+                android:orientation="horizontal"
+                android:queryHint="Search"
+                android:visibility="visible"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+        
+
+    </LinearLayout>
+
+    <ViewFlipper
+        android:id="@+id/vf_mapScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.usamakzafar.trackerzandroidapplication.activity.MapsActivity" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/listView"
+                android:layout_marginTop="130dp"
+                android:layout_marginBottom="90dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
+
+    </ViewFlipper>
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical">
+
+        <CheckBox
+            android:gravity="center"
+            android:tag="3"
+            android:id="@+id/cb_tracking"
+            android:button="@drawable/selectable_play_btn"
+            style="@style/selectbtns"/>
+
+        <LinearLayout
+            android:id="@+id/cb_map"
+            android:tag="0"
+            style="@style/bottomButtons"
+            android:background="@drawable/bottom_btn_left_pressed">
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/pinbt"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="Map"
+                style="@style/bottomBarText" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cb_list"
+            android:tag="1"
+            style="@style/bottomButtons"
+            android:background="@drawable/bottom_button_right">
+            <ImageView
+                android:padding="5dp"
+                android:src="@drawable/listicon"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                style="@style/bottomBarText"
+                android:text="List" />
+        </LinearLayout>
+
+        <CheckBox
+            android:tag="4"
+            android:id="@+id/cb_open"
+            android:button="@drawable/selectable_circle_btn"
+            style="@style/selectbtns"/>
+    </LinearLayout>
+</RelativeLayout>

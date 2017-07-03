@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <ImageView
+        android:layout_marginRight="40dp"
+        android:src="@drawable/mappopup3x"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"/>
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_width="280dp"
+        android:layout_height="75dp">
+
+        <ImageView
+            android:id="@+id/iw_image"
+            android:layout_weight="1.5"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:src="@drawable/foodtruck"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            />
+        <LinearLayout
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
+            <TextView
+                android:id="@+id/t1"
+                android:text="Burger Truck"
+                android:textColor="#444"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/t2"
+                style="@style/lighterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Trucks Description Goes Here" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/star1"
+                    style="@style/starsRating"
+                    android:src="@drawable/starfull" />
+                <ImageView
+                    android:id="@+id/star2"
+                    style="@style/starsRating"
+                    android:src="@drawable/starfull" />
+                <ImageView
+                    android:id="@+id/star3"
+                    style="@style/starsRating"
+                    android:src="@drawable/starfull" />
+                <ImageView
+                    android:id="@+id/star4"
+                    style="@style/starsRating"
+                    android:src="@drawable/starfull" />
+                <ImageView
+                    android:id="@+id/star5"
+                    style="@style/starsRating"
+                    android:src="@drawable/starfull" />
+                <TextView
+                    android:id="@+id/rating"
+                    android:text="(123)"
+                    style="@style/lighterText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <ImageView
+                android:src="@drawable/pintr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/followers"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.8K"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

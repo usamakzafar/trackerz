@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "388784834578",
+    "firebase_url": "https://trackerzandroidapplication.firebaseio.com",
+    "project_id": "trackerzandroidapplication",
+    "storage_bucket": "trackerzandroidapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388784834578:android:915a174447da63e7",
+        "android_client_info": {
+          "package_name": "com.usamakzafar.trackerzandroidapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388784834578-eo4i4ovr7j2mrkmg8ctee733h61s8osc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.usamakzafar.trackerzandroidapplication",
+            "certificate_hash": "406251291e6113acd67a621c40fd2bc10b7621bb"
+          }
+        },
+        {
+          "client_id": "388784834578-tr556s7d721902idejucm0k8gadrg5uo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvKupjq_wJc510hdKK9XpVHkU7xtam1cw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388784834578-tr556s7d721902idejucm0k8gadrg5uo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

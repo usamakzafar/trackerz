@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="100dp" android:gravity="center_vertical">
+
+    <ImageView
+        android:padding="10dp"
+        android:id="@+id/li_truckImage"
+        android:layout_weight="2"
+        android:src="@drawable/common_google_signin_btn_icon_light"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_weight="4"
+        android:layout_width="0dp"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+        <TextView
+            android:id="@+id/li_truckName"
+            android:text="Burger Truck"
+            android:textColor="#444"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/li_truckDescription"
+            style="@style/lighterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="Trucks Description Goes Here" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/star1"
+                style="@style/starsRating"
+                android:src="@drawable/starfull" />
+            <ImageView
+                android:id="@+id/star2"
+                style="@style/starsRating"
+                android:src="@drawable/starfull" />
+            <ImageView
+                android:id="@+id/star3"
+                style="@style/starsRating"
+                android:src="@drawable/starfull" />
+            <ImageView
+                android:id="@+id/star4"
+                style="@style/starsRating"
+                android:src="@drawable/starfull" />
+            <ImageView
+                android:id="@+id/star5"
+                style="@style/starsRating"
+                android:src="@drawable/starfull" />
+            <TextView
+                android:id="@+id/li_truckRating"
+                android:text="(123)"
+                style="@style/lighterText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:src="@drawable/pintr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/li_truckFollowers"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.8K"/>
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/li_pin"
+            android:src="@drawable/redpin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/li_truckDistance"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4.8K"/>
+    </LinearLayout>
+
+
+
+    <ImageView
+        android:layout_weight="1"
+        android:src="@drawable/next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>
