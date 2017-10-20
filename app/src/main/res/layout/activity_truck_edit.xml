@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.usamakzafar.trackerzandroidapplication.activity.admin.TruckEditActivity">
+
+    <RelativeLayout
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:onClick="backPressed"
+            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/back2x" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="@string/edit_truck_header"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:onClick="truckPictureClicked"
+                android:id="@+id/et_admin_trucklogo"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:padding="20dp"
+                android:src="@drawable/profile" />
+
+            <EditText
+                android:id="@+id/et_truckname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/truck_name"
+                android:padding="10dp" />
+
+            <Spinner
+                android:id="@+id/et_spinner_truckType"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/truck_types"
+                android:spinnerMode="dialog" />
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/truck_description"
+                android:lines="4"
+                android:padding="10dp" />
+            <EditText
+                android:id="@+id/et_link_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/facebook"
+                android:maxLines="1"
+                android:padding="10dp"/>
+            <EditText
+                android:id="@+id/et_link_twitter"
+                android:hint="@string/twitter"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/et_link_google"
+                android:hint="@string/google"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <EditText
+                android:id="@+id/et_link_youtube"
+                android:hint="@string/youtube"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                style="@android:style/Widget.Holo.Button.Small"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:onClick="updateDetails"
+                android:text="@string/update" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

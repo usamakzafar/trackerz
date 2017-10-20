@@ -14,6 +14,7 @@
     </style>
 
     <style name="starsRating">
+        <item name="android:clickable">false</item>
         <item name="android:layout_width">13dp</item>
         <item name="android:layout_height">13dp</item>
         <item name="android:padding">1dp</item>
@@ -80,4 +81,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:onClick">socialClicked</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

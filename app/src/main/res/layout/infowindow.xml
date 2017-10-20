@@ -50,28 +50,28 @@
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-                <ImageView
+                <CheckBox
                     android:id="@+id/star1"
                     style="@style/starsRating"
-                    android:src="@drawable/starfull" />
-                <ImageView
+                    android:button="@drawable/checkbox_rating" />
+                <CheckBox
                     android:id="@+id/star2"
                     style="@style/starsRating"
-                    android:src="@drawable/starfull" />
-                <ImageView
+                    android:button="@drawable/checkbox_rating" />
+                <CheckBox
                     android:id="@+id/star3"
                     style="@style/starsRating"
-                    android:src="@drawable/starfull" />
-                <ImageView
+                    android:button="@drawable/checkbox_rating" />
+                <CheckBox
                     android:id="@+id/star4"
                     style="@style/starsRating"
-                    android:src="@drawable/starfull" />
-                <ImageView
+                    android:button="@drawable/checkbox_rating" />
+                <CheckBox
                     android:id="@+id/star5"
                     style="@style/starsRating"
-                    android:src="@drawable/starfull" />
+                    android:button="@drawable/checkbox_rating"/>
                 <TextView
-                    android:id="@+id/rating"
+                    android:id="@+id/td_ratings"
                     android:text="(123)"
                     style="@style/lighterText"
                     android:layout_width="wrap_content"

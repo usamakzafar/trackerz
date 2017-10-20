@@ -2,6 +2,7 @@ package com.usamakzafar.trackerzandroidapplication.activity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -12,13 +13,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,19 +40,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
+import com.usamakzafar.trackerzandroidapplication.HelpingClasses.CircleTransform;
+import com.usamakzafar.trackerzandroidapplication.HelpingClasses.ShareMethods;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.TrucksAdapter;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.MiscMethods;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.RoundedCornersTransform;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.Statics;
 import com.usamakzafar.trackerzandroidapplication.R;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.Trucks;
+import com.usamakzafar.trackerzandroidapplication.activity.admin.AdminActivity;
+import com.usamakzafar.trackerzandroidapplication.models.User;
+import com.usamakzafar.trackerzandroidapplication.network.FirebaseHelpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback , SearchView.OnQueryTextListener{
 
     private GoogleMap mMap;
     private ListView listView;
@@ -57,6 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationListener locationListener;
     private MarkerOptions marker;
     private LatLng currentPosition;
+    private FirebaseHelpers firebaseHelpers;
     private DatabaseReference mDatabase;
     private HashMap<String, Trucks> allTruckList;
     private HashMap<String, String> truckMarkers;
@@ -71,12 +81,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private boolean truckFilter_trucksOnly = false;
     private boolean truckFilter_all = false;
 
+    private SearchView searchView;
+
     private TrucksAdapter listAdapter;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseHelpers = new FirebaseHelpers(this);
+
+        firebaseHelpers.getUserObject();
 
         LoadTrucks();
 
@@ -85,6 +103,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         vf = (ViewFlipper) findViewById(R.id.vf_mapScreen);
         vf.setDisplayedChild(0);
+
+        searchView = (SearchView) findViewById(R.id.truck_search_view);
+        searchView.setOnQueryTextListener(this);
+        ImageView profileimg = (ImageView) findViewById(R.id.profileicon);
+
+        if (firebaseHelpers.userIsSignedIn() && firebaseHelpers.userHasImage())
+            Picasso.with(this).load(firebaseHelpers.getUserImageURL()).transform(new CircleTransform()).into(profileimg);
 
         if (mapIsActive) {
             vf.setDisplayedChild(0);
@@ -316,6 +341,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Getting the Imageview
                 ImageView image = (ImageView) v.findViewById(R.id.iw_image);
 
+                TextView followers = (TextView) v.findViewById(R.id.followers);
+
+                followers.setText(String.valueOf(truck.getFollowers()));
+
                 // Setting the Name
                 name.setText(truck.get_name());
 
@@ -324,6 +353,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 // Setting the Image
                 Picasso.with(MapsActivity.this).load(truck.getLogoURL()).transform(new RoundedCornersTransform()).into(image);
+
+                fillReviewStars(v,truck.getRating(),truck.getReviewsCount());
 
                 // Returning the view containing InfoWindow contents
                 return v;
@@ -336,6 +367,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return null;
         }
     };
+
+    private void fillReviewStars(View v, int rating, int reviewsCount){
+
+        CheckBox s1 = (CheckBox) v.findViewById(R.id.star1);
+        CheckBox s2 = (CheckBox) v.findViewById(R.id.star2);
+        CheckBox s3 = (CheckBox) v.findViewById(R.id.star3);
+        CheckBox s4 = (CheckBox) v.findViewById(R.id.star4);
+        CheckBox s5 = (CheckBox) v.findViewById(R.id.star5);
+
+        //Checking stars for reviews
+        s1.setChecked(rating >=1);
+        s2.setChecked(rating >=2);
+        s3.setChecked(rating >=3);
+        s4.setChecked(rating >=4);
+        s5.setChecked(rating >=5);
+
+        TextView count = (TextView) v.findViewById(R.id.td_ratings);
+        count.setText(MiscMethods.inBrackets(reviewsCount));
+    }
 
     //^^^^^^^^^^^^^^^^MAP METHODS^^^^^^^^^^^^^^^^^^^^^^^^//
 
@@ -433,8 +483,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
         if (truckFilter_tracking){
-
-            //TODO show only the trucks that the user is tracking
+            List<Trucks> rem = new ArrayList<>();
+            for(Map.Entry<String, Trucks> entry : Statics.activeTruckList.entrySet()) {
+                Trucks truck = entry.getValue();
+                Log.i("Trucks in Active List", "Truck: " + truck.get_name() );
+                if(!firebaseHelpers.userIsFollowing(truck.get_id()))
+                    rem.add(truck);
+            }
+            for (Trucks t : rem) {
+                Log.i("Removing Truck", "Truck: " + t.get_name());
+                Statics.activeTruckList.remove(t.get_id());
+            }
 
         }
     }
@@ -463,5 +522,86 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
                 break;
         }
+    }
+
+
+    public void profileIconClicked(View view){
+        switch (firebaseHelpers.getUser()) {
+            case FirebaseHelpers.USER_STATUS_SIGNED_IN:
+                user = FirebaseHelpers.user;
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MapsActivity.this)
+                        .setTitle(getString(R.string.welcome) + user.getName())
+                        .setNegativeButton(R.string.logout, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                firebaseHelpers.Logout();
+                                Toast.makeText(MapsActivity.this, R.string.logout_success, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                if (user != null && !user.getTruck().equals("no")) {
+                    dialog.setPositiveButton(R.string.manage_truck, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(MapsActivity.this, AdminActivity.class));
+                        }
+                    });
+                }
+                dialog.show();
+                break;
+            case FirebaseHelpers.USER_STATUS_FETCHING:
+                firebaseHelpers.getUserObject();
+                Toast.makeText(this, R.string.fetching_user_information, Toast.LENGTH_SHORT).show();
+                break;
+            case FirebaseHelpers.USER_STATUS_NOT_SIGNED_IN:
+                startActivity(new Intent(MapsActivity.this,SigninActivity.class));
+                break;
+        }
+
+    }
+
+    /***** SEARCH BAR *******/
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        implementSearchQuery(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        implementSearchQuery(newText);
+        return false;
+    }
+
+    private void implementSearchQuery(String query) {
+        if (allTruckList.size() >0) {
+            Statics.activeTruckList = new HashMap<>();
+            for (Map.Entry<String, Trucks> entry : allTruckList.entrySet()) {
+                Trucks truck = entry.getValue();
+                if (truck.get_name().toLowerCase().contains(query.toLowerCase()))
+                    Statics.activeTruckList.put(truck.get_id(), truck);
+            }
+            refreshViews();
+        }
+    }
+
+    public void trackserzInfo(View view) {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(R.string.info_dialog_title)
+                .setMessage(R.string.info_dialog_message)
+                .setPositiveButton(R.string.rate, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MapsActivity.this, "Link will be available once uploaded on Google Play", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.share, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ShareMethods methods = new ShareMethods(MapsActivity.this);
+                        methods.shareApp();
+                    }
+                })
+                .show();
     }
 }

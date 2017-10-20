@@ -18,29 +18,32 @@
             android:layout_height="75dp">
 
             <ImageView
+                android:id="@+id/profileicon"
                 android:layout_weight="1"
                 android:padding="9dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                android:onClick="profileIconClicked"/>
 
             <Button
                 android:tag="0"
-                android:text="All"
+                android:text="@string/truck_filter_all"
                 android:background="@drawable/topbar_button_left"
                 style="@style/topBar"/>
             <Button
                 android:tag="1"
-                android:text="Trucks"
+                android:text="@string/truck_filter_trucks"
                 android:background="@drawable/topbar_button_center"
                 style="@style/topBar" />
             <Button
                 android:tag="2"
-                android:text="Events"
+                android:text="@string/truck_filter_events"
                 android:background="@drawable/topbar_button_right"
                 style="@style/topBar" />
 
             <ImageView
+                android:onClick="trackserzInfo"
                 android:layout_weight="1"
                 android:padding="15dp"
                 android:tint="#767676"
@@ -63,6 +66,7 @@
                 android:layout_height="20dp" />
 
             <SearchView
+                android:id="@+id/truck_search_view"
                 android:iconifiedByDefault="false"
                 style="@style/Widget.AppCompat.Light.SearchView"
                 android:background="@drawable/searchbar"
@@ -108,8 +112,10 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
-        android:gravity="center_vertical">
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <CheckBox
             android:gravity="center"
@@ -129,7 +135,7 @@
                 android:layout_width="25dp"
                 android:layout_height="wrap_content" />
             <TextView
-                android:text="Map"
+                android:text="@string/map"
                 style="@style/bottomBarText" />
         </LinearLayout>
 
@@ -145,7 +151,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 style="@style/bottomBarText"
-                android:text="List" />
+                android:text="@string/list" />
         </LinearLayout>
 
         <CheckBox

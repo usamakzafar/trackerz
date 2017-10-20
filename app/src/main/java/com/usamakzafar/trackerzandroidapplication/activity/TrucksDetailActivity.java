@@ -1,18 +1,24 @@
 package com.usamakzafar.trackerzandroidapplication.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -30,6 +36,7 @@ import com.usamakzafar.trackerzandroidapplication.HelpingClasses.ImageAdapter;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.MenuAdapter;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.MiscMethods;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.ReviewsAdapter;
+import com.usamakzafar.trackerzandroidapplication.HelpingClasses.ShareMethods;
 import com.usamakzafar.trackerzandroidapplication.HelpingClasses.Statics;
 import com.usamakzafar.trackerzandroidapplication.R;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckLocation;
@@ -37,11 +44,17 @@ import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckMenuItem;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckPicture;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckReview;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.Trucks;
+import com.usamakzafar.trackerzandroidapplication.activity.interfaces.ReviewsInterface;
+import com.usamakzafar.trackerzandroidapplication.network.FirebaseHelpers;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TrucksDetailActivity extends AppCompatActivity {
+import static com.usamakzafar.trackerzandroidapplication.HelpingClasses.MiscMethods.getDistanceTo;
+
+public class TrucksDetailActivity extends AppCompatActivity implements ReviewsInterface{
     private AdView mAdView;
 
     private int selectedView = 0;
@@ -59,6 +72,10 @@ public class TrucksDetailActivity extends AppCompatActivity {
     private HashMap<String,TruckReview> truckReviews;
     private ReviewsAdapter reviewsAdapter;
 
+    private FirebaseHelpers firebaseHelpers;
+
+    private ProgressDialog pd;
+
     private ViewFlipper vf;
 
     private Button btn_menu, btn_pictures, btn_reviews, btn_info;
@@ -68,6 +85,8 @@ public class TrucksDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trucks_detail);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        firebaseHelpers = new FirebaseHelpers(this);
 
         loadButtons();
 
@@ -99,6 +118,7 @@ public class TrucksDetailActivity extends AppCompatActivity {
         TextView nameTop = (TextView) findViewById(R.id.truckName);
         TextView name = (TextView) findViewById(R.id.td_name);
         TextView dis = (TextView) findViewById(R.id.td_truckDistance);
+        TextView followers = (TextView) findViewById(R.id.td_truckFollowers);
 
         final String logoURL = truck.getLogoURL();
 
@@ -114,10 +134,35 @@ public class TrucksDetailActivity extends AppCompatActivity {
         nameTop.setText(truck.get_name());
         name.setText(truck.get_name());
 
-        MiscMethods m = new MiscMethods();
-        dis.setText(m.getDistanceTo(truck.get_location()));
+        dis.setText(getDistanceTo(truck.get_location()));
+        if(firebaseHelpers.userIsFollowing(truck.get_id())) {
+            ImageView trackbtn = (ImageView) findViewById(R.id.trackButton);
+            trackbtn.setImageDrawable(getResources().getDrawable(R.drawable.td_trackbutton_pressed));
+        }
+        followers.setText(String.valueOf(truck.getFollowers()));
+        fillReviewStars();
 
         setPaid();
+    }
+
+    private void fillReviewStars() {
+        TextView reviewsCount = (TextView) findViewById(R.id.td_ratings);
+        reviewsCount  .setText(MiscMethods.inBrackets(truck.getReviewsCount() ));
+
+        CheckBox s1 = (CheckBox) findViewById(R.id.star1);
+        CheckBox s2 = (CheckBox) findViewById(R.id.star2);
+        CheckBox s3 = (CheckBox) findViewById(R.id.star3);
+        CheckBox s4 = (CheckBox) findViewById(R.id.star4);
+        CheckBox s5 = (CheckBox) findViewById(R.id.star5);
+
+        //Checking stars for reviews
+        int rating = truck.getRating();
+        s1.setChecked(rating >=1);
+        s2.setChecked(rating >=2);
+        s3.setChecked(rating >=3);
+        s4.setChecked(rating >=4);
+        s5.setChecked(rating >=5);
+
     }
 
     private void setPaid() {
@@ -298,7 +343,7 @@ public class TrucksDetailActivity extends AppCompatActivity {
         GridView gridView = (GridView) findViewById(R.id.pictures_gridview);
         pictures = new ArrayList<>();
 
-        imageAdapter = new ImageAdapter(this, pictures);
+        imageAdapter = new ImageAdapter(this, pictures, false);
 
         gridView.setAdapter(imageAdapter);
 
@@ -366,8 +411,9 @@ public class TrucksDetailActivity extends AppCompatActivity {
                         try {
                             TruckReview review = dataSnapshot.getValue(TruckReview.class);
                             truckReviews.put(review.getID(),review);
-                            reviewsAdapter = new ReviewsAdapter(TrucksDetailActivity.this, truckReviews);
+                            reviewsAdapter = new ReviewsAdapter(TrucksDetailActivity.this, truckReviews, false);
                             listView.setAdapter(reviewsAdapter);
+                            fillReviewStars();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -457,5 +503,121 @@ public class TrucksDetailActivity extends AppCompatActivity {
         TruckLocation location = truck.get_location();
         String url = "https://www.google.com/maps/dir/?api=1&destination=" + location.getLatitude() + "," + location.getLongitude();
         MiscMethods.launchLink(this,url);
+    }
+
+    public void reviewPressed(View view){
+        if (FirebaseHelpers.signedIn()){
+            showReviewDialog();
+        } else{
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(R.string.not_signed_in)
+                    .setMessage(R.string.sign_in_for_review)
+                    .setPositiveButton(R.string.common_signin_button_text, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(TrucksDetailActivity.this,SigninActivity.class));
+                        }
+                    })
+                    .setNegativeButton("Cancel",null)
+                    .show();
+        }
+    }
+
+    //***************** REVIEW SUBMITION********************//
+    TruckReview review;
+    SeekBar rating;
+    EditText reviewText;
+    AlertDialog dialog;
+    private void showReviewDialog() {
+        firebaseHelpers.getReviewbyUser(truck);
+        AlertDialog.Builder builder = new AlertDialog.Builder(TrucksDetailActivity.this)
+                .setView(R.layout.add_new_review);
+        dialog = builder.show();
+        TextView title = (TextView) dialog.findViewById(R.id.review_dialog_title);
+        title.setText("Review " + truck.get_name());
+
+        reviewText  = (EditText) dialog.findViewById(R.id.review_dialog_review_text);
+        rating      = (SeekBar) dialog.findViewById(R.id.review_dialog_rating);
+        rating.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                TextView ratingTV = (TextView) dialog.findViewById(R.id.seekbarLabel);
+                ratingTV.setText(getString(R.string.rating_label_prefix) + progress + getString(R.string.rating_label_postfix));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void OnReviewByUserLoaded(boolean success, TruckReview _review) {
+        if(success){
+            review=_review;
+            reviewText.setText(review.getReview());
+            rating.setProgress(review.getRating());
+        }
+        else {
+            review = new TruckReview();
+            review.setID(MiscMethods.getReviewID());
+        }
+    }
+
+    public void submitReview(View view){
+        review.setName(     FirebaseHelpers.user.getName());
+        review.setReview(   reviewText .getText().toString());
+        review.setRating(   rating     .getProgress());
+
+        if(firebaseHelpers.userHasImage())
+            review.setPictureUrl(firebaseHelpers.getUserImageURL().toString());
+        else review.setPictureUrl(getString(R.string.placeholder_image));
+
+        firebaseHelpers.submitReview(review,truck);
+
+        showProgressDialog(getString(R.string.submiting_review));
+    }
+
+    @Override
+    public void OnReviewSubmition(boolean success) {
+        pd.dismiss();
+        if(success) {
+            Toast.makeText(this, R.string.review_successful, Toast.LENGTH_SHORT).show(); dialog.dismiss();
+            LoadReviews();
+            firebaseHelpers.updateTotalRating(truck,truckReviews);
+        }
+        else Toast.makeText(this, R.string.review_unsuccessful, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void showProgressDialog(String string) {
+        pd = new ProgressDialog(this);
+        pd.setMessage(string);
+        pd.show();
+    }
+
+    public void closeDialog(View view){dialog.dismiss();}
+
+    public void followPressed(View view) {
+        ImageView btn  = (ImageView) findViewById(R.id.trackButton);
+        if(firebaseHelpers.userIsFollowing(truck.get_id())){
+            firebaseHelpers.removefollowing(truck);
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.td_trackbutton));
+        }else{
+            firebaseHelpers.addTruckToFollow(truck);
+            btn.setImageDrawable(getResources().getDrawable(R.drawable.td_trackbutton_pressed));
+        }
+    }
+
+    public void truckShare(View view) {
+        ShareMethods shareMethods = new ShareMethods(this);
+        shareMethods.shareTruck(truck);
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,8 +68,16 @@ public class TrucksAdapter extends BaseAdapter {
         TextView txtDesc;
         TextView txtFlwr;
         TextView txtDist;
+        TextView reviews;
         ImageView image;
         ImageView pin;
+
+
+        CheckBox s1;
+        CheckBox s2;
+        CheckBox s3;
+        CheckBox s4;
+        CheckBox s5;
     }
 
     int lastPosition  = -1;
@@ -89,9 +98,16 @@ public class TrucksAdapter extends BaseAdapter {
             viewHolder.txtDesc = (TextView) convertView.findViewById(R.id.li_truckDescription);
             viewHolder.txtFlwr = (TextView) convertView.findViewById(R.id.li_truckFollowers);
             viewHolder.txtDist = (TextView) convertView.findViewById(R.id.li_truckDistance);
+            viewHolder.reviews = (TextView) convertView.findViewById(R.id.li_truckRating);
+
             viewHolder.image   = (ImageView) convertView.findViewById(R.id.li_truckImage);
             viewHolder.pin     = (ImageView) convertView.findViewById(R.id.li_pin);
 
+            viewHolder.s1 = (CheckBox) convertView.findViewById(R.id.star1);
+            viewHolder.s2 = (CheckBox) convertView.findViewById(R.id.star2);
+            viewHolder.s3 = (CheckBox) convertView.findViewById(R.id.star3);
+            viewHolder.s4 = (CheckBox) convertView.findViewById(R.id.star4);
+            viewHolder.s5 = (CheckBox) convertView.findViewById(R.id.star5);
             result=convertView;
 
             convertView.setTag(viewHolder);
@@ -108,7 +124,18 @@ public class TrucksAdapter extends BaseAdapter {
 
         viewHolder.txtName.setText(currentTruck.get_name());
         viewHolder.txtDesc.setText(currentTruck.get_description());
-        viewHolder.txtFlwr.setText(currentTruck.get_open() + "k");
+        viewHolder.txtFlwr.setText(String.valueOf(currentTruck.getFollowers()));
+
+        viewHolder.reviews.setText(MiscMethods.inBrackets(currentTruck.getReviewsCount() ));
+
+
+        //Checking stars for reviews
+        int rating = currentTruck.getRating();
+        viewHolder.s1.setChecked(rating >=1);
+        viewHolder.s2.setChecked(rating >=2);
+        viewHolder.s3.setChecked(rating >=3);
+        viewHolder.s4.setChecked(rating >=4);
+        viewHolder.s5.setChecked(rating >=5);
 
         MiscMethods methods = new MiscMethods();
         viewHolder.txtDist.setText(methods.getDistanceTo(currentTruck.get_location()));

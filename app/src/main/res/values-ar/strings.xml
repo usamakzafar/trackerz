@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">تطبيق تراكرز</string>
+    <string name="pictures_table_name">صور</string>
+    <string name="menu_table_name">قائمة</string>
+    <string name="menu_table_prefex">menu_</string>
+    <string name="reviews_table_name">تعليقات</string>]
+    <string name="username">اسم المستخدم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="auth_failed">فشل تسجيل الدخول. خطأ في اسم المستخدم أو كلمة مرور</string>
+    <string name="invalid_Username">خطأ في اسم المستخدم أو كلمة المرور.</string>
+    <string name="emailaddress">البريد الإلكتروني</string>
+    <string name="register">تسجيل</string>
+    <string name="illegal_characters">خطأ في البريد الإلكتروني أو كلمة المرور. يرجى استخدام عنوان بريد إلكتروني وكلمة مرور صالحين.</string>
+    <string name="confirm_email_address">تأكيد البريد الإلكتروني</string>
+    <string name="full_name">الإسم الكامل</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="users_table_name">المستخدمين</string>
+    <string name="welcome_login_Message">أهلا بك في تراكرز\n الرجاء تسجيل الدخول</string>
+    <string name="signup_button">تسجيل حساب؟</string>
+    <string name="dashboard">لوحة التحكم</string>
+    <string name="edit_truck_header">تعديل العربة</string>
+    <string name="edit_menu_heading">تعديل القائمة</string>
+    <string name="admin_menu_dialog_title_add">إضافة</string>
+    <string name="admin_menu_dialog_title_edit">تعديل</string>
+    <string name="total_pictures">إجمالي الصور</string>
+    <string name="total_reviews">إجمالي التعليقات</string>
+    <string name="total_menu_items">إجمالي القائمة</string>
+    <string name="delete_reviews">حذف تعليق</string>
+    <string name="edit_pictures">تعديل صور</string>
+    <string name="menu_item_id_prefix">item_</string>
+    <string name="menu_updated">تم تحديث القائمة</string>
+    <string name="menu_update_failed">حدث خطأ ما، يرجى إعادة المحاولة</string>
+    <string name="delete_review_prefix">حذف التعليق</string>
+    <string name="error_msg_generic">حدث خطأ ما</string>
+    <string name="delete_successful">تم الحذف</string>
+    <string name="disclaimer_review_delete">ملاحظة:\n حذف التعليق لن يؤثر على التقييم العام!</string>
+    <string name="delete_picture_warning">حذف الصورة؟</string>
+    <string name="update">تحديث</string>
+    <string name="trucks_table_name">عربات</string>
+    <string name="updatingtruck">تحديث تفاصيل العربة</string>
+    <string name="truck_save_successful">تم تحديث العربة</string>
+    <string name="not_signed_in">الرجاء تسجيل الدخول</string>
+    <string name="sign_in_for_review">الرجاء تسجيل الدخول للتعليق</string>
+    <string name="logout">الخروج</string>
+    <string name="logout_success">تم تسجيل الخروج</string>
+    <string name="review">تعليق</string>
+    <string name="review_title">عنوان التعليق</string>
+    <string name="rating_out_of_5">التقييم من ٥</string>
+    <string name="review_prefix">review_</string>
+    <string name="submit">إرسال</string>
+    <string name="submiting_review">إرسال التعليق</string>
+    <string name="review_successful">تم إرسال التعليق</string>
+    <string name="review_unsuccessful">حدث خطأ أثناء إرسال التعليق</string>
+    <string name="uploading_picture">جار تحميل الصورة</string>
+    <string name="rating_label_postfix">من ٥ نجوم)</string>
+    <string name="rating_label_prefix">تقييم (</string>
+    <string name="placeholder_image">http://www.freeiconspng.com/uploads/profile-icon-9.png</string>
+    <string name="info_dialog_message">شكرا لك على استخدام تطبيق تراكرز. إن أعجبك هذا التطبيق، يرجى إضافة التقييم على متجر جوجل</string>
+    <string name="info_dialog_title">تراكرز</string>
+    <string name="share_text_app">جرب تطبيق تراكرز الآن! قم بالتحميل من هنا trackerz.com/app</string>
+    <string name="share_text_message1">أحد أفضل عربات الطعام! </string>
+    <string name="share_text_message2"> تجدون الموقع على تطبيق تراكرز trackerz.com/link</string>
+
+    <string-array name="truck_types">
+        <item>عربة طعام</item>
+        <item>عربة قهوة</item>
+        <item>عربة أخرى</item>
+        <item>فعالية</item>
+    </string-array>
+</resources>

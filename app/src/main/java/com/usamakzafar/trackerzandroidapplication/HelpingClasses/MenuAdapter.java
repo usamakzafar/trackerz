@@ -1,6 +1,8 @@
 package com.usamakzafar.trackerzandroidapplication.HelpingClasses;
 
 import android.content.Context;
+import android.media.Image;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +53,7 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return menuData.get(position);
     }
 
     @Override
@@ -66,6 +68,8 @@ public class MenuAdapter extends BaseAdapter {
         TextView menuItemDescription;
         TextView menuItemPrice;
         ImageView menuItemImage;
+
+        ImageView share;
     }
 
     int lastPosition  = -1;
@@ -86,6 +90,7 @@ public class MenuAdapter extends BaseAdapter {
             viewHolder.menuItemDescription = (TextView) convertView.findViewById(R.id.mi_description);
             viewHolder.menuItemPrice = (TextView) convertView.findViewById(R.id.mi_price);
             viewHolder.menuItemImage = (ImageView) convertView.findViewById(R.id.mi_image);
+            viewHolder.share = (ImageView) convertView.findViewById(R.id.mi_share);
 
             result=convertView;
 
@@ -108,10 +113,11 @@ public class MenuAdapter extends BaseAdapter {
         viewHolder.menuItemImage.setTag(position);
         // Return the completed view to render on screen
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Menu Item Clicked", "Item ID: " + currentMenuItem.getItemID() + ", Item Name: " + currentMenuItem.getItemName());
+                ShareMethods shareMethods = new ShareMethods(mContext);
+                shareMethods.shareMenu(currentMenuItem);
             }
         });
 

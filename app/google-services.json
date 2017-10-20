@@ -40,6 +40,13 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "388784834578-4o8r1t5qdlvlhkq6r7pf8kgpe3of6o1h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asimm.trackerz"
+              }
+            },
+            {
               "client_id": "388784834578-tr556s7d721902idejucm0k8gadrg5uo.apps.googleusercontent.com",
               "client_type": 3
             }

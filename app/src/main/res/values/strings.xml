@@ -7,6 +7,7 @@
 
     <string name="pictures_table_name">pictures</string>
     <string name="menu_table_name">menus</string>
+    <string name="menu_table_prefex">menu_</string>
     <string name="reviews_table_name">reviews</string>
 
     <string name="title_activity_view_image">ViewImage</string>
@@ -15,5 +16,107 @@
     <string name="lipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="auth_failed">Login Failed. Invalid username or password</string>
+    <string name="invalid_Username">Invalid Username and Password.</string>
+    <string name="emailaddress">Email Address</string>
+    <string name="register">Register</string>
+    <string name="illegal_characters">Illegal characters used in email or password. Please use a valid email address and password.</string>
+    <string name="confirm_email_address">Confirm Email Address</string>
+    <string name="full_name">Full Name</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="users_table_name">users</string>
+    <string name="welcome_login_Message">Welcome to Trackerz\nPlease login</string>
+    <string name="signup_button">Don\'t have an account? Register here</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="edit_truck_header">Edit Truck</string>
+    <string name="edit_menu_heading">Edit Menu</string>
+    <string name="admin_menu_dialog_title_add">Add New Menu Item</string>
+    <string name="admin_menu_dialog_title_edit">Edit Menu Item</string>
+    <string name="total_pictures">Total Pictures</string>
+    <string name="total_reviews">Total Reviews</string>
+    <string name="total_menu_items">Total Menu Items</string>
+    <string name="delete_reviews">Delete Reviews</string>
+    <string name="edit_pictures">Edit Pictures</string>
+    <string name="menu_item_id_prefix">item_</string>
+    <string name="menu_updated">Menu Updated</string>
+    <string name="menu_update_failed">Some error occured, please try again</string>
+    <string name="delete_review_prefix">Delete Review</string>
+    <string name="error_msg_generic">An error occurred</string>
+    <string name="delete_successful">Successfully Deleted</string>
+    <string name="disclaimer_review_delete">Note:\nDeleting a review will not have any affect on the overall rating of the truck</string>
+    <string name="delete_picture_warning">Delete picture?</string>
+    <string name="update">Update</string>
+    <string name="trucks_table_name">trucks</string>
+    <string name="updatingtruck">Updating Truck Details</string>
+    <string name="truck_save_successful">Truck successfully updated</string>
+    <string name="not_signed_in">Not signed in</string>
+    <string name="sign_in_for_review">Please sign in to review this truck</string>
+    <string name="logout">Logout</string>
+    <string name="logout_success">Successfully logged out</string>
+    <string name="review">Review</string>
+    <string name="review_title">Review Title</string>
+    <string name="rating_out_of_5">Rating (out of 5)</string>
+    <string name="review_prefix">review_</string>
+    <string name="submit">Submit</string>
+    <string name="submiting_review">Submiting review</string>
+    <string name="review_successful">Review submitted successfully</string>
+    <string name="review_unsuccessful">An error occurred while submitting review</string>
+    <string name="uploading_picture">Uploading Image</string>
+    <string name="rating_label_postfix"> out of 5 stars)</string>
+    <string name="rating_label_prefix">Rating (</string>
+    <string name="placeholder_image">http://www.freeiconspng.com/uploads/female-user-icon-clip-art--30.png</string>
+    <string name="info_dialog_message">Thank you for using Trackerz Android Application If you like this app, please rate us on Google Play</string>
+    <string name="info_dialog_title">Trackerz</string>
+    <string name="share_text_app">Check out Trackerz Android Application! Its so cool! Go to trackerz.com/app and download now!</string>
+    <string name="share_text_message1">Check out this really amazing </string>
+    <string name="share_text_message2"> that I found on Trackerz! trackerz.com/link</string>
+
+    <string name="rate">Rate</string>
+    <string name="share">Share</string>
+    <string name="fetching_user_information">Fetching user information</string>
+    <string name="manage_truck">Manage Truck</string>
+    <string name="welcome">Welcome</string>
+    <string name="email_not_match">Email Address does not match</string>
+    <string name="generic_error">An error occured</string>
+    <string name="truck_filter_all">All</string>
+    <string name="truck_filter_trucks">Trucks</string>
+    <string name="truck_filter_events">Events</string>
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="edit_truck">Edit Truck</string>
+    <string name="reviews">Reviews</string>
+    <string name="menu_items">Menu Items</string>
+    <string name="followers">Followers</string>
+    <string name="open_for_business">Open for Business</string>
+    <string name="auto_update_truck_location">Auto Update Truck Location</string>
+    <string name="please_enter_your_details">Please enter your details</string>
+    <string name="truck_name">Truck Name</string>
+    <string name="truck_description">Truck Description</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="google">Google+</string>
+    <string name="youtube">Youtube</string>
+    <string name="menu">Menu</string>
+    <string name="pictures">Pictures</string>
+    <string name="info">Info</string>
+    <string name="item_name">Item Name</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+
+    <string name="sort_by_name">By Name</string>
+    <string name="sort_by_rating">By Rating</string>
+    <string name="sort_by_distance">By Distance</string>
+    <string name="sort_by_followers">By Followers</string>
+
+    <string-array name="truck_types">
+        <item>Food Truck</item>
+        <item>Coffee Truck</item>
+        <item>Event Truck</item>
+        <item>Other</item>
+    </string-array>
 
 </resources>

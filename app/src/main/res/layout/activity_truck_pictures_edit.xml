@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.usamakzafar.trackerzandroidapplication.activity.admin.TruckPicturesEditActivity">
+
+
+    <RelativeLayout
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:onClick="backPressed"
+            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/back2x" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="@string/edit_pictures"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:onClick="addNew"
+            android:padding="5dp"
+            android:tint="#000"
+            app:srcCompat="@android:drawable/ic_menu_add" />
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/pictures_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center" />
+
+</LinearLayout>

@@ -13,4 +13,6 @@ public class Statics {
 
     public static HashMap<String, Trucks> activeTruckList;
     public static LatLng userLocation;
+
+    public static String[] Truck_type_name = new String[]{"","Food Truck","Coffee Truck","Event Truck","Other"};
 }

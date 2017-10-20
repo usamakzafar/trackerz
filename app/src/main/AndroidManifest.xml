@@ -8,6 +8,9 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -43,6 +46,12 @@
             android:name=".activity.ViewImage"
             android:label="@string/title_activity_view_image"
             android:theme="@style/FullscreenTheme" />
+        <activity android:name=".activity.SigninActivity" />
+        <activity android:name=".activity.admin.AdminActivity" />
+        <activity android:name=".activity.admin.TruckEditActivity" />
+        <activity android:name=".activity.admin.TruckMenuEditActivity" />
+        <activity android:name=".activity.admin.TruckReviewsEditActivity" />
+        <activity android:name=".activity.admin.TruckPicturesEditActivity"></activity>
     </application>
 
 </manifest>

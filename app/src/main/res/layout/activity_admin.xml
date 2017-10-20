@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.usamakzafar.trackerzandroidapplication.activity.admin.AdminActivity">
+
+    <RelativeLayout
+        android:background="@color/gray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:onClick="backPressed"
+            android:padding="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:srcCompat="@drawable/back2x" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="@string/dashboard"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/topheader" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="25dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="25dp">
+
+                <ImageView
+                    android:id="@+id/admin_trucklogo"
+                    android:layout_width="70dp"
+                    android:layout_height="65dp"
+                    android:src="@drawable/profile" />
+
+                <TextView
+                    android:id="@+id/admin_truckname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="11dp"
+                    android:layout_toEndOf="@+id/admin_trucklogo"
+                    android:layout_toRightOf="@+id/admin_trucklogo"
+                    android:text="Burger Truck"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/admin_trucktype"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/admin_truckname"
+                    android:layout_toEndOf="@+id/admin_trucklogo"
+                    android:layout_toRightOf="@+id/admin_trucklogo"
+                    android:text="Burger"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/admin_trucktype"
+                    android:layout_toEndOf="@+id/admin_trucklogo"
+                    android:layout_toRightOf="@+id/admin_trucklogo"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/star1"
+                        style="@style/starsRating"
+                        android:button="@drawable/checkbox_rating" />
+
+                    <CheckBox
+                        android:id="@+id/star2"
+                        style="@style/starsRating"
+                        android:button="@drawable/checkbox_rating" />
+
+                    <CheckBox
+                        android:id="@+id/star3"
+                        style="@style/starsRating"
+                        android:button="@drawable/checkbox_rating" />
+
+                    <CheckBox
+                        android:id="@+id/star4"
+                        style="@style/starsRating"
+                        android:button="@drawable/checkbox_rating" />
+
+                    <CheckBox
+                        android:id="@+id/star5"
+                        style="@style/starsRating"
+                        android:button="@drawable/checkbox_rating" />
+
+                    <TextView
+                        android:id="@+id/td_ratings"
+                        style="@style/lighterText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(123)" />
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/linearLayout2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/admin_truckname"
+                    android:elevation="0dp"
+                    android:onClick="editTruck"
+                    android:text="@string/edit_truck"
+                    android:textSize="10sp"
+                    android:typeface="normal" />
+
+
+            </RelativeLayout>
+
+            <!-- DASHBOARD PANEL -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/gray_light"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/admin_reviews_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="79"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/reviews" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/adminheart" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/admin_menu_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="09"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/menu_items" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        app:srcCompat="@drawable/adminmenu" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/admin_followers_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="39"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/followers" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:padding="2dp"
+                        app:srcCompat="@drawable/adminfollowers" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:onClick="editMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/adminmenu2" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="12"
+                    android:text="@string/total_menu_items" />
+
+                <TextView
+                    android:id="@+id/admin_menu_count2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="3"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="12dp"
+                    app:srcCompat="@drawable/next" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:onClick="editReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/adminreview" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="12"
+                    android:text="@string/total_reviews" />
+
+                <TextView
+                    android:id="@+id/admin_reviews_count2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="39"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="12dp"
+                    app:srcCompat="@drawable/next" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:onClick="editPictures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/adminpicture" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="12"
+                    android:text="@string/total_pictures" />
+
+                <TextView
+                    android:id="@+id/admin_pictures_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="9"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black" />
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="12dp"
+                    app:srcCompat="@drawable/next" />
+
+
+            </LinearLayout>
+
+            <Switch
+                android:onClick="switchToggled"
+                android:id="@+id/admin_open_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin='3dp'
+                android:background="@color/gray_light"
+                android:padding="15dp"
+                android:text="@string/open_for_business" />
+
+            <Switch
+                android:onClick="switchToggled"
+                android:id="@+id/admin_location_switch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin='3dp'
+                android:background="@color/gray_light"
+                android:padding="15dp"
+                android:text="@string/auto_update_truck_location" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.usamakzafar.trackerzandroidapplication.HelpingClasses;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -13,11 +14,17 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.usamakzafar.trackerzandroidapplication.R;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckMenuItem;
 import com.usamakzafar.trackerzandroidapplication.TrucksClasses.TruckReview;
+import com.usamakzafar.trackerzandroidapplication.activity.admin.TruckReviewsEditActivity;
+import com.usamakzafar.trackerzandroidapplication.network.FirebaseHelpers;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,14 +40,16 @@ public class ReviewsAdapter extends BaseAdapter {
 
     private HashMap<String,TruckReview> reviewHashMap;
     private ArrayList<TruckReview> reviewData;
+    private boolean admin;
 
     private Context mContext;
 
 
-    public ReviewsAdapter(Context context, HashMap<String,TruckReview> truckReviewHashMap) {
+    public ReviewsAdapter(Context context, HashMap<String,TruckReview> truckReviewHashMap,boolean _admin) {
         this.reviewHashMap = truckReviewHashMap;
         this.reviewData = new ArrayList<>();
         this.mContext   = context;
+        this.admin = _admin;
 
         for(Map.Entry<String, TruckReview> entry : truckReviewHashMap.entrySet()) {
             TruckReview reviewItem = entry.getValue();
@@ -57,7 +66,7 @@ public class ReviewsAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return reviewData.get(position);
     }
 
     @Override
@@ -94,14 +103,6 @@ public class ReviewsAdapter extends BaseAdapter {
             viewHolder.reviewDate   = (TextView) convertView.findViewById(R.id.ri_time);
             viewHolder.reviewerImage = (ImageView) convertView.findViewById(R.id.ri_image);
 
-            viewHolder.s1 = (CheckBox) convertView.findViewById(R.id.star1);
-            viewHolder.s2 = (CheckBox) convertView.findViewById(R.id.star2);
-            viewHolder.s3 = (CheckBox) convertView.findViewById(R.id.star3);
-            viewHolder.s4 = (CheckBox) convertView.findViewById(R.id.star4);
-            viewHolder.s5 = (CheckBox) convertView.findViewById(R.id.star5);
-
-
-
             result=convertView;
 
             convertView.setTag(viewHolder);
@@ -124,6 +125,35 @@ public class ReviewsAdapter extends BaseAdapter {
         viewHolder.reviewerImage.setTag(position);
 
 
+        fillReviewStars(currentReview, viewHolder,convertView);
+
+
+        //Adding the pop up to view full review
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(admin){deleteReviewDialog(currentReview);}
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                    builder.setTitle("Review by " + currentReview.getName());
+                    builder.setMessage(currentReview.getReview());
+                    builder.show();
+                }
+            }
+        });
+
+        // Return the completed view to render on screen
+        return convertView;
+    }
+
+    private void fillReviewStars(TruckReview currentReview,ViewHolder viewHolder, View convertView) {
+
+        viewHolder.s1 = (CheckBox) convertView.findViewById(R.id.star1);
+        viewHolder.s2 = (CheckBox) convertView.findViewById(R.id.star2);
+        viewHolder.s3 = (CheckBox) convertView.findViewById(R.id.star3);
+        viewHolder.s4 = (CheckBox) convertView.findViewById(R.id.star4);
+        viewHolder.s5 = (CheckBox) convertView.findViewById(R.id.star5);
+
         //Checking stars for reviews
         int rating = currentReview.getRating();
         if (rating >=1)
@@ -137,20 +167,47 @@ public class ReviewsAdapter extends BaseAdapter {
         if (rating >=5)
             viewHolder.s5.setChecked(true);
 
+    }
 
-        //Adding the pop up to view full review
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                builder.setTitle("Review by " + currentReview.getName());
-                builder.setMessage(currentReview.getReview());
-                builder.show();
-            }
-        });
+    private AlertDialog dialog;
+    private void deleteReviewDialog(final TruckReview currentReview) {
+        dialog = new AlertDialog.Builder(mContext)
+                .setTitle(mContext.getString(R.string.delete_review_prefix) + currentReview.getName() + "?")
+                .setMessage(R.string.disclaimer_review_delete)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseReference mDatabase;
+                        mDatabase = FirebaseDatabase.getInstance().getReference();
+                        mDatabase.child(mContext.getString(R.string.reviews_table_name))
+                                .child(Statics.activeTruckList.get(FirebaseHelpers.user.getTruck()).getReviewsReference())
+                                .child(currentReview.getID()).removeValue(new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                if(databaseError == null) {
+                                    Toast.makeText(mContext, R.string.delete_successful, Toast.LENGTH_SHORT).show();
+                                    removeReview(currentReview);
+                                }
+                                else
+                                    Toast.makeText(mContext, R.string.error_msg_generic, Toast.LENGTH_SHORT).show();
+                                dismissDialog();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Cancel",null)
+                .show();
 
-        // Return the completed view to render on screen
-        return convertView;
+
+    }
+
+    private void removeReview(TruckReview currentReview) {
+        reviewData.remove(currentReview);
+    }
+
+    private void dismissDialog() {
+        dialog.dismiss();
     }
 
     // Date parsing to to return time elapsed

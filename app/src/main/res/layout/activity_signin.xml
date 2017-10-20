@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    tools:context="com.usamakzafar.trackerzandroidapplication.activity.SigninActivity">
+
+    <ProgressBar
+        android:id="@+id/loginprogressbar"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/logo"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/loginView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="@string/welcome_login_Message"
+                        android:textAlignment="center"
+                        android:textColor="#000" />
+
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/username"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+                    <Button
+                        style="@android:style/Widget.Holo.Button.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="attemptSignin"
+                        android:text="@string/login" />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_alignParentBottom="true"
+                    android:padding="20dp"
+                    android:onClick="createAccount"
+                    android:textAlignment="center"
+                    android:text="@string/signup_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/signupView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <EditText
+                        android:id="@+id/signup_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/emailaddress"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+                    <EditText
+                        android:id="@+id/confirm_signup_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/confirm_email_address"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+                    <EditText
+                        android:id="@+id/signup_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+                    <Button
+                        style="@android:style/Widget.Holo.Button.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register"
+                        android:onClick="attemptSignUp"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fillDetailsView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/fillDetailsForm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:text="@string/please_enter_your_details"
+                        android:padding="20dp"
+                        android:textAlignment="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/user_pic_imageview"
+                        android:onClick="addUserPicture"
+                        android:layout_width="wrap_content"
+                        android:layout_margin="10dp"
+                        android:padding="10dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/upload"/>
+                    <EditText
+                        android:id="@+id/fd_Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/full_name"
+                        android:inputType="textPersonName"
+                        android:singleLine="true"
+                        android:textAlignment="center" />
+
+
+                    <EditText
+                        android:id="@+id/fd_Date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/date_of_birth"
+                        android:textAlignment="center"
+                        android:ems="10"
+                        android:inputType="date" />
+
+                    <Button
+                        style="@android:style/Widget.Holo.Button.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register"
+                        android:onClick="submitDetails"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+        </LinearLayout>
+
+</RelativeLayout>

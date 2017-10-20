@@ -21,6 +21,10 @@ public class Trucks {
     private int _paidSubscriber;
     private String _id;
     private int _open;
+    private int reviewsCount =0;
+    private int followers = 0;
+
+    private int rating;
 
     private String logoURL;
     private String menuReference;
@@ -162,5 +166,29 @@ public class Trucks {
 
     public void set_paidSubscriber(int _paidSubscriber) {
         this._paidSubscriber = _paidSubscriber;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getReviewsCount() {
+        return reviewsCount;
+    }
+
+    public void setReviewsCount(int reviewsCount) {
+        this.reviewsCount = reviewsCount;
+    }
+
+    public int getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(int followers) {
+        this.followers = followers;
     }
 }
